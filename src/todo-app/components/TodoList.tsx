@@ -7,6 +7,7 @@ const TodoList = () => {
   return (
     <div>
       <h3 className="font-bold text-xl mb-3">Todo List</h3>
+      {todos.length < 1 && <p>No data.</p>}
       <ul className="space-y-2">
         {todos.map((todo) => (
           <li key={todo.id}>
