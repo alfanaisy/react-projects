@@ -44,6 +44,12 @@ const TodoPage = () => {
     localStorage.setItem('todos', JSON.stringify(updatedTodos));
   };
 
+  const handleDeleteTodo = (id: string) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
+  };
+
   return (
     <div className="min-h-screen bg-slate-800 text-white flex justify-around px-2 py-4 gap-2">
       <div className="flex flex-col w-2/5 border-cyan-600 border-2 rounded-md px-4 py-6">
@@ -53,7 +59,11 @@ const TodoPage = () => {
         <TodoForm handleSubmit={handleAddTodo} />
       </div>
       <div className="flex flex-col w-3/5 border-cyan-600 border-2 rounded-md px-4 py-6">
-        <TodoList todos={todos} handleCompleteTodo={handleCompleteTodo} />
+        <TodoList
+          todos={todos}
+          handleCompleteTodo={handleCompleteTodo}
+          handleDeleteTodo={handleDeleteTodo}
+        />
       </div>
     </div>
   );
