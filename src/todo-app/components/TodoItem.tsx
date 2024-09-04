@@ -1,16 +1,14 @@
-import { Todo } from '../pages/todo.page';
+import { Todo } from '../store/todo.store';
+import { useTodoStore } from '../store/todo.store';
 
 interface TodoItemProps {
   todo: Todo;
-  handleCompleteTodo: (id: string) => void;
-  handleDeleteTodo: (id: string) => void;
 }
 
-const TodoItem = ({
-  todo,
-  handleCompleteTodo,
-  handleDeleteTodo,
-}: TodoItemProps) => {
+const TodoItem = ({ todo }: TodoItemProps) => {
+  const completeTodo = useTodoStore((state) => state.completeTodo);
+  const deleteTodo = useTodoStore((state) => state.deleteTodo);
+
   return (
     <div
       className={`w-full min-h-8 flex flex-col border-2 ${
@@ -19,7 +17,7 @@ const TodoItem = ({
     >
       <div
         className="flex justify-between cursor-pointer"
-        onClick={() => handleCompleteTodo(todo.id)}
+        onClick={() => completeTodo(todo.id)}
       >
         <h3 className={`font-bold ${todo.isComplete ? 'line-through' : ''}`}>
           {todo.title}
@@ -31,7 +29,7 @@ const TodoItem = ({
       <p className="capitalize">{todo.priority}</p>
       <button
         className="text-red-600 border-[1px] border-red-500 py-1 rounded-md mt-4 w-24 self-end"
-        onClick={() => handleDeleteTodo(todo.id)}
+        onClick={() => deleteTodo(todo.id)}
       >
         Delete
       </button>

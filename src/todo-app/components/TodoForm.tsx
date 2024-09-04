@@ -1,21 +1,16 @@
 import { useState } from 'react';
+import { useTodoStore } from '../store/todo.store';
 
-interface TodoFormProps {
-  handleSubmit: (
-    title: string,
-    date: string,
-    priority: 'low' | 'medium' | 'high'
-  ) => void;
-}
-
-const TodoForm = ({ handleSubmit }: TodoFormProps) => {
+const TodoForm = () => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('low');
 
+  const addTodo = useTodoStore((state) => state.addTodo);
+
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleSubmit(title, date, priority);
+    addTodo(title, date, priority);
     setTitle('');
     setDate('');
     setPriority('low');
