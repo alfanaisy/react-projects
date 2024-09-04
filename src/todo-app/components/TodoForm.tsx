@@ -10,12 +10,14 @@ const TodoForm = () => {
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!title || !date) {
+      alert('Please fill in all fields');
+      return;
+    }
     addTodo(title, date, priority);
     setTitle('');
     setDate('');
     setPriority('low');
-    console.log(title, date, priority);
-    alert('Todo added successfully!');
   };
 
   return (
